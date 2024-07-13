@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <title>Perpustakaan di Jakarta</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+
+        <style>
+            #map {height: 800px;}
+        </style>
+
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+    crossorigin=""></script>
+    </head>
+        <body>
+            <div id="map"></div>
+            <script>
+                var map = L.map('map').setView([-6.200000, 106.816666], 13);
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+
+var loi = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Lokasi": "Perpustakaan Nasional",
+        "Kota": "Jakarta Pusat"
+      },
+      "geometry": {
+        "coordinates": [
+          106.85158072883979,
+          -6.198746130422748
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Lokasi": "Perpustakaan Erasmus Huis",
+        "Kota": "Jakarta Selatan"
+      },
+      "geometry": {
+        "coordinates": [
+          106.82874429130635,
+          -6.23414872995663
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Lokasi": "Perpustakaan Taman Ismail Marzuki",
+        "Kota": "Jakarta Pusat"
+      },
+      "geometry": {
+        "coordinates": [
+          106.83943131582345,
+          -6.189201182546043
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Lokasi": "Perpustakaan dan Arsip Kota Administrasi",
+        "Kota": "Jakarta Utara"
+      },
+      "geometry": {
+        "coordinates": [
+          106.91786998633643,
+          -6.130568404178206
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Lokasi": "Perpustakaan Mercu Buana",
+        "Kota": "Jakarta Barat"
+      },
+      "geometry": {
+        "coordinates": [
+          106.73852414779128,
+          -6.209244830207496
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+      "Lokasi":"Perpustakaan Jakarta Timur",
+      "Kota":"Jakarta Timur"},
+      "geometry": {
+        "coordinates": [
+          106.87207505477875,
+          -6.221580331380451
+        ],
+        "type": "Point"
+      }
+    }
+  ]
+};   
+var geojson = L.geoJSON(loi, {
+        onEachFeature: function (feature, layer) {
+        layer.bindPopup(feature.properties.nama);
+        }
+}).addTo(map);
+    
+L.geoJSON(geojson).bindPopup(function(layer){
+        return layer.feature.properties.nama 
+}).addTo(map);
+        </script>
+    </body>
+</html>
